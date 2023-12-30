@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- google font用import -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
 <style>
 body {
   background-color: #ffffff;
-  font-family: 'Dela Gothic One', sans-serif;
 }
 
 h1 {
@@ -39,21 +39,23 @@ span#count {
   color: #ff0000;
 }
 
-#green-back {
-background-color: #00FF00;
+#mainContent {
+  background-color: #00FF00;
+  font-family: 'Dela Gothic One', sans-serif;
 }
 </style>
 </head>
 <script>
-window.onkeydown = function(event) {
-  if (event.keyCode === 85) {
-    countUp();
-  }
-};
+  //ショートカットキー用の設定
+  window.onkeydown = function(event) {
+    if (event.keyCode === 85) {
+      countUp();
+    }
+  };
 </script>
 <body>
 <h1>キル数カウント</h1>
-<div id="green-back">
+<div id="mainContent">
 <br>
 <p>現在 <span id="count">0</span> キル</p>
 <br>
@@ -64,36 +66,41 @@ window.onkeydown = function(event) {
 <button onclick="countUp()">カウントアップ (u)</button>
 <button onclick="countDown()">カウントダウン</button>
 <br><br>
-<input type="text" id="countToText">
+<input type="number" id="countToText">
 <button onclick="countToText()">反映</button>
 </div>
 
 <script>
-function countUp() {
-  var count = document.getElementById("count").innerHTML;
-  count = parseInt(count) + 1;
-  document.getElementById("count").innerHTML = count;
-}
-
-document.getElementById("count").attachEvent("onclick", countUp);
-
-function countDown() {
-  var count = document.getElementById("count").innerHTML;
-  count = parseInt(count) - 1;
-  if (count <= 0) {
-    count = 0;
+  // カウントアップ用
+  function countUp() {
+    var count = document.getElementById("count").innerHTML;
+    count = parseInt(count) + 1;
+    document.getElementById("count").innerHTML = count;
   }
-  document.getElementById("count").innerHTML = count;
-}
 
-function countToText() {
-  var countTo = document.getElementById("countToText").value;
-  if (countTo === "") {
-   countTo = 0
+  // ショートカットキー用
+  document.getElementById("count").attachEvent("onclick", countUp);
+
+  // カウントダウン用
+  function countDown() {
+    var count = document.getElementById("count").innerHTML;
+    count = parseInt(count) - 1;
+    if (count <= 0) {
+      count = 0;
+    }
+    document.getElementById("count").innerHTML = count;
   }
-  document.getElementById("count").innerHTML = countTo;
-  document.getElementById("countToText").value = "";
-}
+
+  // 手動入力反映
+  function countToText() {
+    var countTo = document.getElementById("countToText").value;
+    // 入力が空欄の場合は0を反映
+    if (countTo === "") {
+     countTo = 0
+    }
+    document.getElementById("count").innerHTML = countTo;
+    document.getElementById("countToText").value = "";
+  }
 
 </script>
 </body>
