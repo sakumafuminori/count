@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: #ffffff;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  text-align: left;
+}
+
+p {
+  font-size: 25px;
+  text-align: center;
+}
+
+span {
+  font-size: 18px;
+  color: #000000;
+}
+
+button {
+  font-size: 16px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: #ffffff;
+  background-color: #000000;
+}
+
+span#count {
+  font-weight: bold;
+  font-size: 35px;
+  color: #ff0000;
+}
+
+#green-back {
+background-color: #00FF00;
+}
+</style>
+</head>
+<script>
+window.onkeydown = function(event) {
+  if (event.keyCode === 85) {
+    countUp();
+  }
+};
+</script>
+<body>
+<h1>キル数カウント</h1>
+<div id="green-back">
+<br>
+<p>現在 <span id="count">0</span> キル</p>
+<br>
+</div>
+<br>
+<br>
+<div align="center">
+<button onclick="countUp()">カウントアップ (u)</button>
+<button onclick="countDown()">カウントダウン</button>
+<br><br>
+<input type="text" id="countToText">
+<button onclick="countToText()">反映</button>
+</div>
+
+<script>
+function countUp() {
+  var count = document.getElementById("count").innerHTML;
+  count = parseInt(count) + 1;
+  document.getElementById("count").innerHTML = count;
+}
+
+document.getElementById("count").attachEvent("onclick", countUp);
+
+function countDown() {
+  var count = document.getElementById("count").innerHTML;
+  count = parseInt(count) - 1;
+  if (count <= 0) {
+    count = 0;
+  }
+  document.getElementById("count").innerHTML = count;
+}
+
+function countToText() {
+  var countTo = document.getElementById("countToText").value;
+  if (countTo === "") {
+   countTo = 0
+  }
+  document.getElementById("count").innerHTML = countTo;
+  document.getElementById("countToText").value = "";
+}
+
+</script>
+</body>
+</html>
